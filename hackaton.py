@@ -36,15 +36,15 @@ def setup_brazilian_analyzer():
 
     return analyzer
 
-# 2. Processamento do Arquivo Excel + Métricas
+# 2. Processamento do Arquivo Excel
 def processar_pedidos(input_file, output_file):
-    df = pd.read_excel(input_file)
+    df = pd.read_excel(input_file) # Lê o arquivo excel
     analyzer = setup_brazilian_analyzer()
     
     contem_pii = []
 
     for index, row in df.iterrows():
-        texto_pedido = str(row['Texto Mascarado'])
+        texto_pedido = str(row['Texto Mascarado']) # Avalia os textos separadamente
         
         results = analyzer.analyze(
             text=texto_pedido,
@@ -64,6 +64,5 @@ def processar_pedidos(input_file, output_file):
 
 # Execução
 if __name__ == "__main__":
-    # Se você tiver uma coluna no Excel com o gabarito (ex: "GABARITO_PII"),
-    # passe o nome dela no parâmetro gabarito_coluna.
     processar_pedidos('AMOSTRA_e-SIC.xlsx', 'AMOSTRA_e-SIC_SINALIZADA.xlsx')
+
